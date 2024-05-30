@@ -14,11 +14,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Users_1 = __importDefault(require("../../database/schemas/Users"));
 const db_1 = require("../../database/db");
+const auth_1 = require("../../auth");
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const newUser = req.body;
-    console.log(newUser);
+    const saltRounds = 5;
+    const passwordHash = yield auth_1.authUtil.generatePasswordHash(req.body.password, saltRounds);
     try {
-        yield db_1.db.insert(Users_1.default).values(newUser);
+        // Creating new user data
+        const newUserData = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            userName: req.body.userName,
+            emailAddress: req.body.emailAddress,
+            password: passwordHash
+        };
+        yield db_1.db.insert(Users_1.default).values(newUserData);
         res.status(200).json({ success: true });
     }
     catch (error) {
