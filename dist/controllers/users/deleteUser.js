@@ -16,10 +16,22 @@ const Users_1 = __importDefault(require("../../database/schemas/Users"));
 const db_1 = require("../../database/db");
 const drizzle_orm_1 = require("drizzle-orm");
 const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.body.id;
+    var _a, _b;
     try {
+        // Ensure req.decoded is set by the authorizeUser middleware
+        const id = (_b = (_a = req.decoded) === null || _a === void 0 ? void 0 : _a.userData) === null || _b === void 0 ? void 0 : _b.userId;
+        if (!id) {
+            return res.status(400).json({ message: "User ID is missing from request" });
+        }
+        // returns an array
         const response = yield db_1.db.delete(Users_1.default).where((0, drizzle_orm_1.eq)(Users_1.default.id, id)).returning();
-        res.json({ message: 'User successfully deleted!', response: response });
+        // if response is greater than 0 the user has been deleted
+        if (response.length > 0) {
+            res.json({ message: 'User successfully deleted!', response: response[0] });
+        }
+        else {
+            res.json({ message: 'User not deleted!' });
+        }
     }
     catch (error) {
         res.json({ message: 'Error deleting user!', error: error });

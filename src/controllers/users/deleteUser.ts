@@ -5,11 +5,27 @@ import { eq } from 'drizzle-orm';
 
 const deleteUser = async (req: Request, res: Response) => {
 
-    const id:string = req.body.id
 
     try {
+
+        // Ensure req.decoded is set by the authorizeUser middleware
+        const id = req.decoded?.userData?.userId;
+
+        if (!id) {
+            return res.status(400).json({ message: "User ID is missing from request" });
+        }
+
+        // returns an array
         const response  = await db.delete(User).where(eq(User.id, id)).returning();
-        res.json({message:'User successfully deleted!', response: response})        
+
+        // if response is greater than 0 the user has been deleted
+        if(response.length > 0){
+            res.json({message:'User successfully deleted!', response: response[0]})        
+
+        }else{
+            res.json({message:'User not deleted!'})        
+
+        }
 
     } catch (error) {
         res.json({message:'Error deleting user!', error: error})        

@@ -11,26 +11,34 @@ const loginUser = async (req: Request, res: Response) => {
     };
 
     // Finding user in database
-    const foundUser = await db.select().from(User).where(eq(User.emailAddress, userLoginData.emailAddress));
-    console.log(foundUser);
+    const foundUserArr = await db.select().from(User).where(eq(User.emailAddress, userLoginData.emailAddress));
+    console.log(foundUserArr);
 
     // If user not found
-    if (foundUser.length === 0) {
+    if (foundUserArr.length === 0) {
         return res.status(404).json({ success: false, message: 'Could not find user.' });
     }
 
-    const user = foundUser[0];
+    const foundUser = foundUserArr[0];
 
     // Validate password
-    const passwordValid = await authUtil.validatePassword(userLoginData.password, user.password);
+    const passwordValid = await authUtil.validatePassword(userLoginData.password, foundUser.password);
 
     // If password not valid
     if (!passwordValid) {
         return res.status(401).json({ success: false, message: 'Password was incorrect.' });
     }
 
-    // If password is valid
-    res.status(200).json({ message: "User has successfully logged in!", foundUser: user });
+    if(passwordValid){
+        const accessTokenUserData = {
+            userId: foundUser.id,
+            emailAddress: foundUser.emailAddress
+        }
+
+        const accessToken = await authUtil.generateAccessToken(accessTokenUserData)
+        return res.status(200).json({message: "User has successfully logged in!", accessToken});
+    }
+
 };
 
 export default loginUser;

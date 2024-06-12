@@ -16,13 +16,27 @@ const Users_1 = __importDefault(require("../../database/schemas/Users"));
 const db_1 = require("../../database/db");
 const drizzle_orm_1 = require("drizzle-orm");
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.body.id;
+    var _a, _b;
     try {
-        const result = yield db_1.db.select().from(Users_1.default).where((0, drizzle_orm_1.eq)(Users_1.default.id, id));
-        if (result.length === 0) {
+        // Ensure req.decoded is set by the authorizeUser middleware
+        const id = (_b = (_a = req.decoded) === null || _a === void 0 ? void 0 : _a.userData) === null || _b === void 0 ? void 0 : _b.userId;
+        if (!id) {
+            return res.status(400).json({ message: "User ID is missing from request" });
+        }
+        const foundUserArr = yield db_1.db.select().from(Users_1.default).where((0, drizzle_orm_1.eq)(Users_1.default.id, id));
+        if (foundUserArr.length === 0) {
             return res.status(404).json({ success: false, message: "User not found" });
         }
-        res.status(200).json({ success: true, user: result });
+        // 
+        const foundUser = {
+            userImage: foundUserArr[0].userImage,
+            firstName: foundUserArr[0].firstName,
+            lastName: foundUserArr[0].lastName,
+            emailAddress: foundUserArr[0].emailAddress,
+            userName: foundUserArr[0].userName,
+            lastUpdated: foundUserArr[0].lastUpdated
+        };
+        res.status(200).json({ success: true, user: foundUser });
     }
     catch (error) {
         console.error("Error fetching user:", error);

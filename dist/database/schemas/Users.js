@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const pg_core_1 = require("drizzle-orm/pg-core");
 const User = (0, pg_core_1.pgTable)('users', {
     id: (0, pg_core_1.uuid)('id').primaryKey().defaultRandom().unique(), // UUID v4 primary key
+    userImage: (0, pg_core_1.text)('user_image'),
     firstName: (0, pg_core_1.text)('first_name').notNull(), // Not nullable text field
     lastName: (0, pg_core_1.text)('last_name').notNull(), // Not nullable text field
     emailAddress: (0, pg_core_1.text)('email_address').unique().notNull(), // Unique and not nullable

@@ -15,19 +15,34 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Users_1 = __importDefault(require("../../database/schemas/Users"));
 const db_1 = require("../../database/db");
 const drizzle_orm_1 = require("drizzle-orm");
+const auth_1 = require("../../auth");
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const userUpdates = req.body;
-    console.log(userUpdates);
+    var _a, _b;
     try {
+        // Ensure req.decoded is set by the authorizeUser middleware
+        const id = (_b = (_a = req.decoded) === null || _a === void 0 ? void 0 : _a.userData) === null || _b === void 0 ? void 0 : _b.userId;
+        if (!id) {
+            return res.status(400).json({ message: "User ID is missing from request" });
+        }
+        const userToUpdate = req.body;
+        // hash password if in req.body
+        if (userToUpdate.password) {
+            const saltRounds = 5;
+            const passwordHash = yield auth_1.authUtil.generatePasswordHash(req.body.password, saltRounds);
+            userToUpdate.password = passwordHash;
+        }
+        // response returns as an array with an object
         const response = yield db_1.db.update(Users_1.default)
-            .set(userUpdates)
-            .where((0, drizzle_orm_1.eq)(Users_1.default.id, userUpdates.id))
+            .set(userToUpdate)
+            .where((0, drizzle_orm_1.eq)(Users_1.default.id, id))
             .returning({ updatedUser: Object.assign({}, Users_1.default) });
         console.log(response);
+        // if response array length is 0, user not found
         if (response.length === 0) {
             return res.status(404).json({ success: false, message: "User not found" });
         }
-        return res.status(200).json({ success: true, message: 'User updated successfully.', response });
+        const updatedUser = response[0].updatedUser;
+        return res.status(200).json({ success: true, message: 'User updated successfully.', updatedUser });
     }
     catch (error) {
         console.error("Error updating user:", error);

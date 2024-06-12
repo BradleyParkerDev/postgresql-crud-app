@@ -22,20 +22,26 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         password: req.body.password
     };
     // Finding user in database
-    const foundUser = yield db_1.db.select().from(Users_1.default).where((0, drizzle_orm_1.eq)(Users_1.default.emailAddress, userLoginData.emailAddress));
-    console.log(foundUser);
+    const foundUserArr = yield db_1.db.select().from(Users_1.default).where((0, drizzle_orm_1.eq)(Users_1.default.emailAddress, userLoginData.emailAddress));
+    console.log(foundUserArr);
     // If user not found
-    if (foundUser.length === 0) {
+    if (foundUserArr.length === 0) {
         return res.status(404).json({ success: false, message: 'Could not find user.' });
     }
-    const user = foundUser[0];
+    const foundUser = foundUserArr[0];
     // Validate password
-    const passwordValid = yield auth_1.authUtil.validatePassword(userLoginData.password, user.password);
+    const passwordValid = yield auth_1.authUtil.validatePassword(userLoginData.password, foundUser.password);
     // If password not valid
     if (!passwordValid) {
         return res.status(401).json({ success: false, message: 'Password was incorrect.' });
     }
-    // If password is valid
-    res.status(200).json({ message: "User has successfully logged in!", foundUser: user });
+    if (passwordValid) {
+        const accessTokenUserData = {
+            userId: foundUser.id,
+            emailAddress: foundUser.emailAddress
+        };
+        const accessToken = yield auth_1.authUtil.generateAccessToken(accessTokenUserData);
+        return res.status(200).json({ message: "User has successfully logged in!", accessToken });
+    }
 });
 exports.default = loginUser;
