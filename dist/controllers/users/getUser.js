@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Users_1 = __importDefault(require("../../database/schemas/Users"));
-const db_1 = require("../../database/db");
 const drizzle_orm_1 = require("drizzle-orm");
+const db_1 = require("../../database/db");
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     try {

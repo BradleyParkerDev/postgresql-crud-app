@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import User from '../../database/schemas/Users';
-import { db } from '../../database/db';
 import { eq } from 'drizzle-orm';
+import { db } from '../../database/db';
+
 
 const getUser = async (req: Request, res: Response) => {
 

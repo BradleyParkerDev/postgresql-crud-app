@@ -1,4 +1,7 @@
 "use strict";
+///////////////////////////////////////////////////////////////////////
+// Local Connection
+///////////////////////////////////////////////////////////////////////
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -27,15 +30,47 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.db = void 0;
-const neon_http_1 = require("drizzle-orm/neon-http");
-const serverless_1 = require("@neondatabase/serverless");
+// Pool Connection
+const node_postgres_1 = require("drizzle-orm/node-postgres");
+const pg_1 = require("pg");
 const schema = __importStar(require("./schemas"));
 const dotenv_1 = __importDefault(require("dotenv"));
 // Load environment variables from .env file
 dotenv_1.default.config();
-const connectionString = process.env.TEST_DB;
+const connectionString = process.env.LOCAL_DATABASE_URL;
 if (!connectionString) {
-    throw new Error('Environment variable TEST_DB is not defined');
+    throw new Error('Environment variable for database is not defined');
 }
-const sql = (0, serverless_1.neon)(connectionString);
-exports.db = (0, neon_http_1.drizzle)(sql, { schema, logger: true });
+const pool = new pg_1.Pool({ connectionString: connectionString });
+exports.db = (0, node_postgres_1.drizzle)(pool, { schema, logger: true });
+///////////////////////////////////////////////////////////////////////
+// Neon Connection
+///////////////////////////////////////////////////////////////////////
+// Pool Connection
+// import { Pool, neonConfig } from '@neondatabase/serverless';
+// import { drizzle } from 'drizzle-orm/neon-serverless';
+// import ws from 'ws';
+// neonConfig.webSocketConstructor = ws;  // <-- this is the key bit
+// import * as schema from './schemas';
+// import dotenv from 'dotenv';
+// // Load environment variables from .env file
+// dotenv.config();
+// const connectionString = process.env.NEON_POOL_DATABASE_URL as string;
+// if (!connectionString) {
+//   throw new Error('Environment variable for database is not defined');
+// }
+// const pool = new Pool({ connectionString: connectionString });
+// export const db = drizzle(pool, { schema, logger: true });
+// HTTP Connection
+// import { drizzle } from 'drizzle-orm/neon-http';
+// import { neon } from '@neondatabase/serverless';
+// import * as schema from './schemas';
+// import dotenv from 'dotenv';
+// // Load environment variables from .env file
+// dotenv.config();
+// const connectionString = process.env.NEON_HTTP_DATABASE_URL as string;
+// if (!connectionString) {
+//   throw new Error('Environment variable for database is not defined');
+// }
+// const sql = neon(connectionString!);
+// export const db = drizzle(sql, {schema, logger: true});

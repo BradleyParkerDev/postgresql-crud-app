@@ -1,13 +1,14 @@
 import { Request, Response } from 'express';
 import User from '../../database/schemas/Users';
-import { db } from '../../database/db';
 import { eq } from 'drizzle-orm';
+import { db } from '../../database/db';
 
 const deleteUser = async (req: Request, res: Response) => {
 
 
     try {
 
+        
         // Ensure req.decoded is set by the authorizeUser middleware
         const id = req.decoded?.userData?.userId;
 

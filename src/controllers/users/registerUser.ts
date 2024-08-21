@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import User from '../../database/schemas/Users';
-import { db } from '../../database/db';
 import { authUtil } from '../../auth';
+import { db } from '../../database/db';
+
 
 const registerUser = async (req: Request, res: Response) => {
     const saltRounds = 5;
@@ -10,6 +11,7 @@ const registerUser = async (req: Request, res: Response) => {
 
     try {
 
+        
         // Creating new user data
         const newUserData = {
             firstName: req.body.firstName,

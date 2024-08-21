@@ -5,10 +5,18 @@ import dotenv from 'dotenv';
 // Load environment variables from .env file
 dotenv.config();
 
-const connectionString = process.env.TEST_DB as string;
+
+// Local
+const connectionString = process.env.LOCAL_DATABASE_URL as string;
+
+
+// Neon
+
+// const connectionString = process.env.NEON_HTTP_DATABASE_URL as string;
+// const connectionString = process.env.NEON_POOL_DATABASE_URL as string;
 
 if (!connectionString) {
-	throw new Error('Environment variable TEST_DB is not defined');
+	throw new Error('Environment variable for database is not defined');
 }
 
 export default defineConfig({
@@ -23,14 +31,3 @@ export default defineConfig({
 	strict: true,
 })
 
-// import { defineConfig } from 'drizzle-kit'
-
-// export default defineConfig({
-//  schema: "./schema.ts",
-//   dialect: 'postgresql',
-//   dbCredentials: {
-//     url: process.env.DB_URL,
-//   },
-//   verbose: true,
-//   strict: true,
-// })

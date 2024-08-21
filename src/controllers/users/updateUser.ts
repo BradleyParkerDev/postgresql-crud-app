@@ -1,14 +1,17 @@
 import { Request, Response } from 'express';
 import User from '../../database/schemas/Users';
-import { db } from '../../database/db';
 import { eq } from 'drizzle-orm';
 import { authUtil } from '../../auth';
+import { db } from '../../database/db';
+
+
 
 const updateUser = async (req: Request, res: Response) => {
 
 
     try {
 
+        
         // Ensure req.decoded is set by the authorizeUser middleware
         const id = req.decoded?.userData?.userId;
 

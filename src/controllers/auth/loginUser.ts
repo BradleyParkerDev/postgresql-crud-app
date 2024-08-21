@@ -1,10 +1,13 @@
 import { Request, Response } from "express";
 import User from "../../database/schemas/Users";
-import { db } from "../../database/db";
 import { eq } from "drizzle-orm";
 import { authUtil } from "../../auth";
+import { db } from '../../database/db';
+
 
 const loginUser = async (req: Request, res: Response) => {
+
+
     const userLoginData = {
         emailAddress: req.body.emailAddress,
         password: req.body.password
