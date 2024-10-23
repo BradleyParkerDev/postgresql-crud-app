@@ -12,14 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const verifyAccessToken_1 = __importDefault(require("../accessToken/verifyAccessToken"));
+const verifyToken_1 = __importDefault(require("../token/verifyToken"));
+const UserSessions_1 = __importDefault(require("../../database/schemas/UserSessions"));
 const authorizeUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('Middleware!');
+    const userSession = UserSessions_1.default;
+    console.log(userSession);
+    res.cookie('token', 'your-jwt-token', { httpOnly: true, maxAge: 900000 });
     try {
         const bearerToken = req.headers['authorization'];
         if (bearerToken) {
             const accessToken = bearerToken.split(' ')[1];
-            const decoded = yield (0, verifyAccessToken_1.default)(accessToken);
+            const decoded = yield (0, verifyToken_1.default)(accessToken);
             // console.log(decoded)
             if (!decoded) {
                 console.error('Invalid Token');

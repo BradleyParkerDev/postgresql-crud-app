@@ -2,7 +2,7 @@
 import  { pgTable, text, uuid, timestamp }  from 'drizzle-orm/pg-core';
 
 const User = pgTable('users', {
-	id: uuid('id').primaryKey().defaultRandom().unique(), // UUID v4 primary key
+	userId: uuid('user_id').primaryKey().defaultRandom().unique(), // UUID v4 primary key
 	userImage: text('user_image'),
 	firstName: text('first_name').notNull(), // Not nullable text field
 	lastName: text('last_name').notNull(), // Not nullable text field

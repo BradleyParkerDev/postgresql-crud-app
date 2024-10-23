@@ -20,10 +20,11 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Ensure req.decoded is set by the authorizeUser middleware
         const id = (_b = (_a = req.decoded) === null || _a === void 0 ? void 0 : _a.userData) === null || _b === void 0 ? void 0 : _b.userId;
+        res.cookie('token', 'your-jwt-token', { httpOnly: true, maxAge: 900000 });
         if (!id) {
             return res.status(400).json({ message: "User ID is missing from request" });
         }
-        const foundUserArr = yield db_1.db.select().from(Users_1.default).where((0, drizzle_orm_1.eq)(Users_1.default.id, id));
+        const foundUserArr = yield db_1.db.select().from(Users_1.default).where((0, drizzle_orm_1.eq)(Users_1.default.userId, id));
         if (foundUserArr.length === 0) {
             return res.status(404).json({ success: false, message: "User not found" });
         }

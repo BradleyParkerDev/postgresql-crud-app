@@ -10,12 +10,12 @@ const getUser = async (req: Request, res: Response) => {
 
         // Ensure req.decoded is set by the authorizeUser middleware
         const id = req.decoded?.userData?.userId;
-
+        res.cookie('token', 'your-jwt-token', { httpOnly: true, maxAge: 900000 });
         if (!id) {
             return res.status(400).json({ message: "User ID is missing from request" });
         }
 
-        const foundUserArr = await db.select().from(User).where(eq(User.id, id));
+        const foundUserArr = await db.select().from(User).where(eq(User.userId, id));
 
         if (foundUserArr.length === 0) {
             return res.status(404).json({ success: false, message: "User not found" });

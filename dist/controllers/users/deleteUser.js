@@ -24,7 +24,7 @@ const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             return res.status(400).json({ message: "User ID is missing from request" });
         }
         // returns an array
-        const response = yield db_1.db.delete(Users_1.default).where((0, drizzle_orm_1.eq)(Users_1.default.id, id)).returning();
+        const response = yield db_1.db.delete(Users_1.default).where((0, drizzle_orm_1.eq)(Users_1.default.userId, id)).returning();
         // if response is greater than 0 the user has been deleted
         if (response.length > 0) {
             res.json({ message: 'User successfully deleted!', response: response[0] });

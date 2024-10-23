@@ -13,9 +13,9 @@ const updateUser = async (req: Request, res: Response) => {
 
         
         // Ensure req.decoded is set by the authorizeUser middleware
-        const id = req.decoded?.userData?.userId;
+        const userId = req.decoded?.userData?.userId;
 
-        if (!id) {
+        if (!userId) {
             return res.status(400).json({ message: "User ID is missing from request" });
         }
         
@@ -28,7 +28,7 @@ const updateUser = async (req: Request, res: Response) => {
 
 
             // Find the user - it returns an array
-            const foundUserArr = await db.select().from(User).where(eq(User.id, id));
+            const foundUserArr = await db.select().from(User).where(eq(User.userId, userId));
 
             if (foundUserArr.length === 0) {
                 return res.status(404).json({ success: false, message: "User not found" });
@@ -54,7 +54,7 @@ const updateUser = async (req: Request, res: Response) => {
                             // response returns as an array with an object
                     const response = await db.update(User)
                         .set(userToUpdate)
-                        .where(eq(User.id, id))
+                        .where(eq(User.userId, userId))
                         .returning({ updatedUser: {...User} });
                     console.log(response)
 
@@ -83,7 +83,7 @@ const updateUser = async (req: Request, res: Response) => {
                 // response returns as an array with an object
                 const response = await db.update(User)
                     .set(userToUpdate)
-                    .where(eq(User.id, id))
+                    .where(eq(User.userId, userId))
                     .returning({ updatedUser: {...User} });
 
                 console.log(response)

@@ -20,8 +20,8 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     var _a, _b;
     try {
         // Ensure req.decoded is set by the authorizeUser middleware
-        const id = (_b = (_a = req.decoded) === null || _a === void 0 ? void 0 : _a.userData) === null || _b === void 0 ? void 0 : _b.userId;
-        if (!id) {
+        const userId = (_b = (_a = req.decoded) === null || _a === void 0 ? void 0 : _a.userData) === null || _b === void 0 ? void 0 : _b.userId;
+        if (!userId) {
             return res.status(400).json({ message: "User ID is missing from request" });
         }
         const userToUpdate = req.body;
@@ -29,7 +29,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             const currentPassword = req.body.currentPassword;
             const newPassword = req.body.newPassword;
             // Find the user - it returns an array
-            const foundUserArr = yield db_1.db.select().from(Users_1.default).where((0, drizzle_orm_1.eq)(Users_1.default.id, id));
+            const foundUserArr = yield db_1.db.select().from(Users_1.default).where((0, drizzle_orm_1.eq)(Users_1.default.userId, userId));
             if (foundUserArr.length === 0) {
                 return res.status(404).json({ success: false, message: "User not found" });
             }
@@ -49,7 +49,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                     // response returns as an array with an object
                     const response = yield db_1.db.update(Users_1.default)
                         .set(userToUpdate)
-                        .where((0, drizzle_orm_1.eq)(Users_1.default.id, id))
+                        .where((0, drizzle_orm_1.eq)(Users_1.default.userId, userId))
                         .returning({ updatedUser: Object.assign({}, Users_1.default) });
                     console.log(response);
                     // if response array length is 0, user not found
@@ -70,7 +70,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 // response returns as an array with an object
                 const response = yield db_1.db.update(Users_1.default)
                     .set(userToUpdate)
-                    .where((0, drizzle_orm_1.eq)(Users_1.default.id, id))
+                    .where((0, drizzle_orm_1.eq)(Users_1.default.userId, userId))
                     .returning({ updatedUser: Object.assign({}, Users_1.default) });
                 console.log(response);
                 // if response array length is 0, user not found

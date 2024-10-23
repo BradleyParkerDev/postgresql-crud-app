@@ -1,6 +1,6 @@
 {
-  "id": "bd2581a2-e910-4d52-b13e-18122a25adfc",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "b1536545-7a44-40b5-b723-df853e3dbebf",
+  "prevId": "bd2581a2-e910-4d52-b13e-18122a25adfc",
   "version": "6",
   "dialect": "postgresql",
   "tables": {
@@ -19,7 +19,7 @@
           "name": "user_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "last_updated": {
           "name": "last_updated",

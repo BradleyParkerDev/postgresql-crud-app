@@ -1,5 +1,5 @@
 // accessToken
-import generateAccessToken from "./accessToken/generateAccessToken";
+import generateToken from "./token/generateToken";
 
 // hashing
 import generatePasswordHash from "./hashing/generatePasswordHash";
@@ -16,7 +16,7 @@ import validatePassword from "./validation/validatePassword";
 export const authUtil =  {
 
     // accessToken
-    generateAccessToken,
+    generateToken,
 
     // hashing
     generatePasswordHash,

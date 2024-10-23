@@ -17,7 +17,7 @@ const deleteUser = async (req: Request, res: Response) => {
         }
 
         // returns an array
-        const response  = await db.delete(User).where(eq(User.id, id)).returning();
+        const response  = await db.delete(User).where(eq(User.userId, id)).returning();
 
         // if response is greater than 0 the user has been deleted
         if(response.length > 0){

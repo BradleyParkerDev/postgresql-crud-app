@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authUtil = void 0;
 // accessToken
-const generateAccessToken_1 = __importDefault(require("./accessToken/generateAccessToken"));
+const generateToken_1 = __importDefault(require("./token/generateToken"));
 // hashing
 const generatePasswordHash_1 = __importDefault(require("./hashing/generatePasswordHash"));
 //  middleware
@@ -14,7 +14,7 @@ const authorizeUser_1 = __importDefault(require("./middleware/authorizeUser"));
 const validatePassword_1 = __importDefault(require("./validation/validatePassword"));
 exports.authUtil = {
     // accessToken
-    generateAccessToken: generateAccessToken_1.default,
+    generateToken: generateToken_1.default,
     // hashing
     generatePasswordHash: generatePasswordHash_1.default,
     // middleware

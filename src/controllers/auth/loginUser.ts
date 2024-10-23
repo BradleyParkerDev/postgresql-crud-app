@@ -34,11 +34,11 @@ const loginUser = async (req: Request, res: Response) => {
 
     if(passwordValid){
         const accessTokenUserData = {
-            userId: foundUser.id,
+            userId: foundUser.userId,
             emailAddress: foundUser.emailAddress
         }
 
-        const accessToken = await authUtil.generateAccessToken(accessTokenUserData)
+        const accessToken = await authUtil.generateToken(accessTokenUserData)
         return res.status(200).json({message: "User has successfully logged in!", accessToken});
     }
 

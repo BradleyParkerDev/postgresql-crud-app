@@ -37,10 +37,10 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     if (passwordValid) {
         const accessTokenUserData = {
-            userId: foundUser.id,
+            userId: foundUser.userId,
             emailAddress: foundUser.emailAddress
         };
-        const accessToken = yield auth_1.authUtil.generateAccessToken(accessTokenUserData);
+        const accessToken = yield auth_1.authUtil.generateToken(accessTokenUserData);
         return res.status(200).json({ message: "User has successfully logged in!", accessToken });
     }
 });

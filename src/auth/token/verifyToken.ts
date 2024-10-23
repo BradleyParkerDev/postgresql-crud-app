@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config(); // Load environment variables
 
-const verifyAccessToken = async (accessToken:string) => {
+const verifyToken = async (accessToken:string) => {
     if (!accessToken) {
         console.error('No token provided');
         return null;
@@ -23,6 +23,6 @@ const verifyAccessToken = async (accessToken:string) => {
 
 }
 
-export default verifyAccessToken
+export default verifyToken
 
 

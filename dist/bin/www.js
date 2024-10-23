@@ -13,7 +13,7 @@ const debug = (0, debug_1.default)('express-generator-example:server');
 /**
  * Get port from environment and store in Express.
  */
-const port = normalizePort(process.env.PORT || '4000');
+const port = normalizePort(process.env.PORT || '3001');
 app_1.default.set('port', port);
 /**
  * Create HTTP server.

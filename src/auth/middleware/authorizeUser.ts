@@ -1,13 +1,19 @@
 import { Response, Request, NextFunction } from "express";
-import verifyAccessToken from "../accessToken/verifyAccessToken";
+import verifyToken from "../token/verifyToken";
+import UserSession from "../../database/schemas/UserSessions";
 
 const authorizeUser = async (req: Request, res: Response, next: NextFunction) => {
     console.log('Middleware!');
+    const userSession = UserSession
+
+    console.log(userSession)
+    res.cookie('token', 'your-jwt-token', { httpOnly: true, maxAge: 900000 });
+
     try {
         const bearerToken = req.headers['authorization'];
         if (bearerToken) {
             const accessToken = bearerToken.split(' ')[1];
-            const decoded = await verifyAccessToken(accessToken);
+            const decoded = await verifyToken(accessToken);
             // console.log(decoded)
             if (!decoded) {
                 console.error('Invalid Token');

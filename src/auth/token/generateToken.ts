@@ -8,7 +8,7 @@ interface UserData {
     emailAddress: string;
 }
 
-export const generateAccessToken = async (userData: UserData): Promise<string> => {
+export const generateToken = async (userData: UserData): Promise<string> => {
     // Calculate expiration time: 7 days in seconds
     const accessTokenExp = Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60;
 
@@ -34,5 +34,5 @@ export const generateAccessToken = async (userData: UserData): Promise<string> =
     return accessToken; // Return the token directly
 };
 
-export default generateAccessToken;
+export default generateToken;
 
