@@ -1,6 +1,6 @@
-# PostgreSQL Express Crud App
+# PostgreSQL Express CRUD App
 
-This is a TypeScript-based Express server that uses PostgreSQL as the database. It can serve as a starting point for new projects, featuring basic middleware setup, routing, error handling, integration with PostgreSQL using Drizzle ORM, and user authentication.
+This is a TypeScript-based Express server that uses PostgreSQL as its database.  It features a basic middleware setup, routing, error handling, integration with a PostgreSQL using Drizzle ORM, and user authentication. 
 
 ## Overview
 
