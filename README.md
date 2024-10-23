@@ -4,7 +4,7 @@ This is a TypeScript-based Express server that uses PostgreSQL as its database. 
 
 ## Overview
 
-This app is designed to be scalable and flexible, offering full CRUD capabilities for user data. It includes middleware for handling cookies, CORS, logging, and error management──providing a solid foundation for building RESTful APIs with session-based authentication. The PostgreSQL database is integrated with Drizzle ORM, enabling seamless database migrations and schema management. 
+This app is designed to be scalable and flexible, offering full CRUD capabilities for user data. It includes middleware for handling cookies, CORS, logging, and error management. Its PostgreSQL database is integrated using Drizzle ORM, which enables seamless database migrations and schema management. In any event, it will provided a solid foundation for building RESTful APIs with session-based authentication.
 
 ## Features
 
