@@ -123,11 +123,6 @@ postgresql-express-crud-app/
 - **drizzle-kit**: CLI tool for managing migrations with Drizzle ORM.
 - **typescript**: TypeScript language.
 
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request if you have any improvements or new features you would like to add.
-
 ## License
 
 None.
