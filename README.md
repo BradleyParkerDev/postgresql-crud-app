@@ -4,15 +4,21 @@ This is a TypeScript-based Express server that uses PostgreSQL as its database. 
 
 ## Overview
 
-This server is built with TypeScript and Express, providing a robust and scalable structure for building RESTful APIs. It includes essential middleware for parsing cookies, handling CORS, logging HTTP requests, and managing errors. The server also supports environment variable configuration using `dotenv`.
+This app is designed to be scalable and flexible, offering full CRUD capabilities for user data. It includes middleware for handling cookies, CORS, logging, and error management──providing a solid foundation for building RESTful APIs with session-based authentication. The PostgreSQL database is integrated with Drizzle ORM, enabling seamless database migrations and schema management. 
 
 ## Features
 
-- TypeScript for type safety and better development experience
-- Basic middleware setup (cookie parser, CORS, logging)
-- Environment variable configuration with `dotenv`
-- Error handling
-- Development and production scripts
+- TypeScript for type safety and an improved development experience
+- Secure session-based authentication with HTTP-only cookies
+- Refresh tokens for maintaining user sessions and access tokens for authorization
+- Full CRUD (Create, Read, Update, Delete) operations for managing user data
+- Support for both guest and authenticated user sessions
+- Middleware setup for cookie parsing, CORS, and request logging
+- Environment variable management with `dotenv`
+- Robust error handling
+- Development and production-ready scripts
+
+
 
 ## Project Structure
 ```
@@ -31,7 +37,7 @@ postgresql-express-crud-app/
 │   │   └── migrate.ts           # Database migration execution script
 │   ├── routes/                  # API route definitions
 │   ├── types/                   # Custom TypeScript types and interfaces
-│   ├── app.ts                   # Main Express app setup
+│   └── app.ts                   # Main Express app setup
 ├── .env                         # Environment variables (not committed to Git)
 ├── .gitignore                   # Specifies files and directories to ignore in Git
 ├── drizzle.config.ts            # Configuration for Drizzle ORM
@@ -124,4 +130,4 @@ Contributions are welcome! Please open an issue or submit a pull request if you 
 
 ## License
 
-none
+None.
