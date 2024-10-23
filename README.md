@@ -21,7 +21,9 @@ This app is designed to be scalable and flexible, offering full CRUD capabilitie
 
 
 ## Project Structure
+
 ```
+
 postgresql-express-crud-app/
 ├── dist/                        # Compiled TypeScript files
 ├── node_modules/                # Project dependencies
@@ -46,7 +48,6 @@ postgresql-express-crud-app/
 ├── package-lock.json            # Locked versions of dependencies
 ├── README.md                    # Project documentation
 └── tsconfig.json                # TypeScript configuration file
-
 
 ```
 
