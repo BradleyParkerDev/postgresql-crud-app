@@ -26,7 +26,7 @@ postgresql-express-crud-app/
 ├── dist/                        # Compiled TypeScript files
 ├── node_modules/                # Project dependencies
 ├── src/                         # Source code directory
-│   ├── auth/                    # Handles authentication logic
+│   ├── auth/                    # Contains functions that handle authentication logic
 │   ├── bin/
 │   │   └── www.ts               # Entry point for starting the server
 │   ├── controllers/             # Controllers to handle business logic for routes
