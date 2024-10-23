@@ -1,6 +1,6 @@
-# Express TS Server
+# PostgreSQL Express Crud App
 
-This is a TypeScript-based Express server skeleton that can be used as a starting point for new projects. It includes basic middleware setup, routing, and error handling.
+This is a TypeScript-based Express server that uses PostgreSQL as the database. It can serve as a starting point for new projects, featuring basic middleware setup, routing, error handling, integration with PostgreSQL using Drizzle ORM, and user authentication.
 
 ## Overview
 
