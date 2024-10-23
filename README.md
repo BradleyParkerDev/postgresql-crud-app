@@ -86,27 +86,37 @@ postgresql-express-crud-app/
 
 ## Dependencies
 
-- **concurrently**: Run multiple commands concurrently
-- **cookie-parser**: Middleware to parse cookies
-- **cors**: Middleware to enable CORS
-- **debug**: A tiny debugging utility
-- **dotenv**: Loads environment variables from a `.env` file into `process.env`
-- **express**: Web framework for Node.js
-- **http-errors**: Create HTTP errors for Express
-- **morgan**: HTTP request logger middleware
-- **nodemon**: Tool to automatically restart the server on file changes
-- **rimraf**: A deep deletion module for node (like rm -rf)
+- **@neondatabase/serverless**: Neon database serverless support for PostgreSQL.
+- **bcrypt**: Library for hashing passwords.
+- **concurrently**: Run multiple commands concurrently.
+- **cookie-parser**: Middleware to parse cookies.
+- **cors**: Middleware to enable CORS.
+- **debug**: A tiny debugging utility.
+- **dotenv**: Loads environment variables from a `.env` file into `process.env`.
+- **drizzle-orm**: TypeScript ORM for interacting with PostgreSQL.
+- **express**: Web framework for Node.js.
+- **http-errors**: Create HTTP errors for Express.
+- **jose**: A library for handling JWTs and other cryptographic operations.
+- **morgan**: HTTP request logger middleware.
+- **nodemon**: Tool to automatically restart the server on file changes.
+- **pg**: PostgreSQL client for Node.js.
+- **rimraf**: A deep deletion module for node (like `rm -rf`).
+- **ws**: WebSocket library for real-time functionality.
 
 ## Dev Dependencies
 
-- **@types/cookie-parser**: TypeScript definitions for cookie-parser
-- **@types/cors**: TypeScript definitions for cors
-- **@types/debug**: TypeScript definitions for debug
-- **@types/dotenv**: TypeScript definitions for dotenv
-- **@types/express**: TypeScript definitions for Express
-- **@types/morgan**: TypeScript definitions for morgan
-- **@types/node**: TypeScript definitions for Node.js
-- **typescript**: TypeScript language
+- **@types/bcrypt**: TypeScript definitions for bcrypt.
+- **@types/cookie-parser**: TypeScript definitions for cookie-parser.
+- **@types/cors**: TypeScript definitions for cors.
+- **@types/debug**: TypeScript definitions for debug.
+- **@types/express**: TypeScript definitions for Express.
+- **@types/morgan**: TypeScript definitions for morgan.
+- **@types/node**: TypeScript definitions for Node.js.
+- **@types/pg**: TypeScript definitions for pg (PostgreSQL client).
+- **@types/ws**: TypeScript definitions for WebSocket (ws) library.
+- **drizzle-kit**: CLI tool for managing migrations with Drizzle ORM.
+- **typescript**: TypeScript language.
+
 
 ## Contributing
 
